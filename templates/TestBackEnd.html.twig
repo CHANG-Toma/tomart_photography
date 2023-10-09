@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="{{ asset('css/tailwind.css') }} ">
+  <title>
+    {% block title %}Tom'Art Photographie{% endblock %}
+  </title>
+</head>
+
+<body>
+
+{% block body %}
+
+{% include 'header.html.twig' %}
+
+<section class="w-full max-w-md mx-auto mt-10 bg-white rounded-lg p-10">
+  <h1 class="text-2xl font-bold mb-6">Ajouter une image au portfolio :</h1>
+
+  {{ form_start(form) }}
+  <div class="mb-4">
+    {{ form_label(form.texte, 'Texte') }}
+    {{ form_widget(form.texte, {'attr': {'class': 'border p-2 w-full'}}) }}
+    {{ form_errors(form.texte) }}
+  </div>
+
+  <div class="mb-4">
+    {{ form_label(form.url, 'URL') }}
+    {{ form_widget(form.url, {'attr': {'class': 'border p-2 w-full'}}) }}
+    {{ form_errors(form.url) }}
+  </div>
+
+  <div class="mb-4">
+      {{ form_label(form.type, 'Type') }}
+      {{ form_widget(form.type, {'attr': {'class': 'border p-2 w-full'}}) }}
+      {{ form_errors(form.type) }}
+    </div>
+
+  <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Ajouter</button>
+  {{ form_end(form) }}
+</section>
+
+
+{% endblock %}
+
+{% include 'footer.html.twig'%}
+
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+home_controller:
+    resource: '../src/Controller'
+    type: annotation
+
+# config/routes.yaml
+kernel:
+    resource: '../src/Kernel.php'
+    type: annotation
+
+portfolio:
+    path: /portfolio
+    controller: App\Controller\portfolioController::portfolio
+
+ # Formulaire ajouter une image
+Form:
+    path: /Form
+    controller: App\Controller\DownloadController::Form
+
+
+
+

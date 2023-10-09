@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ asset('css/tailwind.css') }} ">
+    <link rel="stylesheet" href="{{ asset('css/font-awesome/css/font-awesome.min.css') }} ">
+    <title>
+        {% block title %}Tom'Art Photographie{% endblock %}
+    </title>
+
+</head>
+<body>
+
+{% block body %}git
+
+{% include 'header.html.twig' %}
+
+<section class="mt-6 md:mt-0 relative">
+    <div class="absolute w-full h-full top-0 flex justify-center items-center">
+        <h1 class="text-white text-9xl font-thin tracking-wide">Let me show you some</h1>
+    </div>
+    <img class="w-full " src="https://i.postimg.cc/fLN9Nwrd/DSC-8775.jpg" alt="banner">
+</section>
+
+<section class="flex justify-center m-10">
+    <div>
+        <h1>Some of my art creation </h1>
+    </div>
+      <button type="submit" class="bg-black hover:bg-black text-white font-bold py-2 px-4 rounded">Travel</button>
+      <button type="submit" class="bg-black hover:bg-black text-white font-bold py-2 px-4 rounded">Portrait</button>
+      <button type="submit" class="bg-black hover:bg-black text-white font-bold py-2 px-4 rounded">Street</button>
+
+</section>
+
+<section class="flex flex-col items-center flex-wrap lg:flex-row lg:justify-center gap-10 m-10 ">
+
+    <div class="relative flex justify-center group">
+        <img class="w-[450px] h-[450px] min-w-[330px] object-cover transition group-hover:bg-black" src="{{ allImage[0].url }}">
+        <div class="absolute z-30 flex w-full h-full justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <p class="text-white text-lg font-normal text-center">{{ allImage[0].texte }}</p>
+        </div>
+        <div class="absolute z-20 h-full w-full bg-black opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
+    </div>
+    <div class="relative flex justify-center group">
+        <img class="w-[926px] h-[450px] min-w-[330px] object-cover transition group-hover:bg-black" src="{{ allImage[1].url }}">
+        <div class="absolute z-30 flex w-full h-full justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <p class="text-white text-lg font-normal text-center">{{ allImage[1].texte }}</p>
+        </div>
+        <div class="absolute z-20 h-full w-full bg-black opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
+    </div>
+
+</section>
+
+<section class="flex flex-col items-center flex-wrap lg:flex-row lg:justify-center gap-10 m-10 ">
+        {% for image in allImage[2:] %}
+            <div class="relative flex justify-center group">
+                <img class="w-[450px] h-[450px] object-cover transition group-hover:bg-black" src={{image.url}}>
+                <div class="absolute z-30 flex w-full h-full justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <p class="text-white text-lg font-normal text-center">{{ image.texte }}</p>
+                </div>
+                <div class="absolute z-20 h-full w-full bg-black opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
+            </div>
+        {% endfor %}
+</section>
+
+{% endblock %}
+
+{% include 'footer.html.twig'%}
+
+</body>
+</html>

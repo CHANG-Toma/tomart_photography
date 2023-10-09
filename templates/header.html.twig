@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ asset('css/tailwind.css') }} ">
+    <link rel="stylesheet" href="{{ asset('css/font-awesome/css/font-awesome.min.css') }} ">
+    <title>
+        {% block title %}Tom'Art Photographie{% endblock %}
+    </title>
+
+</head>
+
+<body class="">
+    <header class="sticky flex flex-col sm:flex-row sm:justify-evenly text-white top-0 bg-black z-50">
+
+    {# header #}
+    <nav class=" flex flex-col md:flex-row flex-wrap justify-around justify-center">
+                {# lien text #}
+                <div class="flex justify-center mb-7 md:mb-0 text-white">
+                    <ul class="flex flex-col sm:flex-row sm:gap-10 md:items-center xl:items-center">
+                        <li>
+                            <a href="#">About</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('portfolio') }}">Portfolio</a> <!-- Nom de la route vers le portfolio -->
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            {# logo #}
+            <div class="py-2">
+                <a href="#" class="flex">
+                   <img class="ml-2 md:ml-0" src="https://i.postimg.cc/sD4wGQ91/logo-trans.png" alt="logo" width="150" height="100">
+                </a>
+            </div>
+
+             <nav class=" flex flex-col md:flex-row flex-wrap justify-around justify-center">
+                    {# lien text #}
+                     <div class="flex justify-center mb-7 md:mb-0 text-white">
+                         <ul class="flex flex-col sm:flex-row sm:gap-10 md:items-center xl:items-center">
+                             <li>
+                                 <a href="#">Gear</a>
+                             </li>
+                             <li>
+                                 <a href="#">Contact</a>
+                             </li>
+                         </ul>
+                     </div>
+                 </nav>
+    </header>
+</body>
+
+</html>

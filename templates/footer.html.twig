@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ asset('css/tailwind.css') }} ">
+    <link rel="stylesheet" href="{{ asset('css/font-awesome/css/font-awesome.min.css') }} ">
+    <title>
+        {% block title %}Tom'Art Photographie{% endblock %}
+    </title>
+
+</head>
+
+<body>
+    <footer class="w-full flex flex-col sm:flex-row sm:justify-evenly text-sm text-white p-5 gap-6 top-0 bg-black z-50">
+        <div>
+            <ul class="flex flex-col gap-2">
+                <a href="#"> <li class="uppercase font-bold mb-4">Contact</li> </a>
+                <a href="#"><li>toma11chang@gmail.com</li></a>
+                <a href="#"><li>+06 86 93 05 22</li></a>
+
+            </ul>
+        </div>
+        <div>
+            <ul class="flex flex-col gap-2">
+                <a href="#"><li class="uppercase font-bold mb-4">Adresse</li></a>
+                <a href="#"><li>Tahiti, French Polynesia</li></a>
+                <a href="#"><li>France, Paris</li></a>
+            </ul>
+        </div>
+        <div>
+            <ul class="flex flex-col gap-2">
+                <a href="#"><li class="uppercase font-bold mb-4">Rendez-vous / Boutique</li></a>
+                <a href="#"><li>Prise de rendez-vous</li></a>
+            </ul>
+        </div>
+    </footer>
+</body>
+
+</html>

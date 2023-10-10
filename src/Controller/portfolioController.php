@@ -21,17 +21,20 @@ private $Images;
     #[Route('/portfolio', name: 'portfolio')]
     public function portfolio(): Response
     {
-        $ImagesTravel = $this->Images->findBy("Travel");
-        $ImagesPortrait = $this->Images->findBy("Portrait");
-        $ImagesSport = $this->Images->findBy("Sport");
-        $allImage = $this->Images->findAll();
-        //dd($allImage);
+        $allImages = $this->Images->findAll();
+        $imagesByType = [];
+
+        foreach ($allImages as $image) {
+            $type = $image->getType();
+            $imagesByType[$type][] = $image->getUrl();
+        }
+        //dd($imagesByType);
 
         return $this->render('portfolio.html.twig', [
-            'allImage' => $allImage,
-            'ImagesTravel' => $ImagesTravel,
-            'ImagesPortrait' => $ImagesPortrait,
-            'ImagesSport' => $ImagesSport
+            'allImages' => $allImages,
+            'imagesByType' => $imagesByType
         ]);
     }
+
+
 }

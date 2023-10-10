@@ -35,7 +35,7 @@
 </section>
 
 <section class="flex flex-col items-center flex-wrap lg:flex-row lg:justify-center gap-10 m-10" id="photo-grid">
-    {% for image in allImage %}
+    {% for image in allImages %}
         <div class="relative flex justify-center group">
             <img class="w-[450px] h-[450px] min-w-[330px] object-cover transition group-hover:bg-black" src="{{ image.url }}">
             <div class="absolute z-30 flex w-full h-full justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -53,28 +53,19 @@
     const filterPortrait = document.getElementById("filter-portrait");
     const filterSport = document.getElementById("filter-sport");
 
-    // Les URL des images obtenues depuis le contrôleur
-    const imagesTravel = [
-        "{{ ImagesTravel }}",
-    ];
-    const imagesPortrait = [
-        "{{ ImagesPortrait }}",
-    ];
-    const imagesSport = [
-        "{{ ImagesSport }}",
-    ];
-    const allImages = [
-        {% for image in allImage %}
-            "{{ image.url }}",
-        {% endfor %}
-    ];
+    // Les données des images obtenues depuis le contrôleur
+    const imagesByType = JSON.parse('{{ imagesByType|json_encode()|raw }}');
+    const allImages = JSON.parse('{{ allImages|json_encode()|raw }}');
+
+    console.log(imagesByType);
+    console.log(allImages);
 
     // Fonction pour afficher les photos en fonction du type sélectionné
     function displayPhotos(images) {
         photoGrid.innerHTML = "";
-        images.forEach(url => {
+        images.forEach(image => {
             const img = document.createElement("img");
-            img.src = url;
+            img.src = image.url;
             img.className = "w-full h-auto rounded";
             photoGrid.appendChild(img);
         });
@@ -82,9 +73,9 @@
 
     // Écouteurs d'événements pour les boutons de filtre
     filterAll.addEventListener("click", () => displayPhotos(allImages));
-    filterTravel.addEventListener("click", () => displayPhotos(imagesTravel));
-    filterPortrait.addEventListener("click", () => displayPhotos(imagesPortrait));
-    filterSport.addEventListener("click", () => displayPhotos(imagesSport));
+    filterTravel.addEventListener("click", () => displayPhotos(imagesByType.Travel));
+    filterPortrait.addEventListener("click", () => displayPhotos(imagesByType.Portrait));
+    filterSport.addEventListener("click", () => displayPhotos(imagesByType.Sport));
 
     // Affichez toutes les photos par défaut
     displayPhotos(allImages);

@@ -22,19 +22,29 @@ private $Images;
     public function portfolio(): Response
     {
         $allImages = $this->Images->findAll();
-        $imagesByType = [];
+        $allImagesData = array_map(function($image) {
+            return [
+                'url' => $image->getUrl(),
+                'texte' => $image->getTexte()
+            ];
+        }, $allImages);
 
+        $imagesByType = [];
         foreach ($allImages as $image) {
             $type = $image->getType();
-            $imagesByType[$type][] = $image->getUrl();
+            $imagesByType[$type][] = [
+                'url' => $image->getUrl(),
+                'texte' => $image->getTexte()
+            ];
         }
+
+        //dd($allImages);
         //dd($imagesByType);
 
         return $this->render('portfolio.html.twig', [
-            'allImages' => $allImages,
+            'allImages' => $allImagesData,
             'imagesByType' => $imagesByType
         ]);
     }
-
 
 }

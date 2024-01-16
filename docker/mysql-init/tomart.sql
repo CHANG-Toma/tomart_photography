@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `testlamusee`
+-- Base de données : `tomart`
 --
 
 -- --------------------------------------------------------
@@ -41,22 +41,13 @@ CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
 -- Structure de la table `download_modele`
 --
 
-DROP TABLE IF EXISTS `download_modele`;
 CREATE TABLE IF NOT EXISTS `download_modele` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `url` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `texte` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Déchargement des données de la table `download_modele`
---
-
-INSERT INTO `download_modele` (`id`, `url`, `texte`) VALUES
-(1, 'test', 'test'),
-(6, 'URL TEST', 'L\'Amusée'),
-(7, 'https://i.postimg.cc/yNhTQK2b/', 'L\'Amusée m\'a permis de trouver');
+                                                 `id` int NOT NULL AUTO_INCREMENT,
+                                                 `url` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+    `texte` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+    `type` varchar(255) NOT NULL,
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -72,17 +63,6 @@ CREATE TABLE IF NOT EXISTS `images_modele` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Déchargement des données de la table `images_modele`
---
-
-INSERT INTO `images_modele` (`id`, `texte`, `url`) VALUES
-(1, 'J\'ai fait confectionner ma robe de mariée chez L\'Amusée, et j\'ai adoré le concept de pouvoir mixer les modèles', 'https://i.postimg.cc/52CgzLg1/photo-cliente-3.png'),
-(2, 'Un grand merci pour la qualité de votre travail', 'https://i.postimg.cc/pT2J37HX/photo-cliente-2-1.png'),
-(3, 'Belle expérience avec L\'Amusée. Une équipe très pro, réactive et à l\'écoute', 'https://i.postimg.cc/KvVQ4JnJ/photo-l-va-2-1.png'),
-(4, 'Les robes sont originales et de très bonne qualité', 'https://i.postimg.cc/ZqzcxnsN/Photos-cliente-1-1.png'),
-(5, 'L\'Amusée m\'a permis de trouver la robe parfaite pour mon mariage civil', 'https://i.postimg.cc/yNhTQK2b/Photo-3-1.png');
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

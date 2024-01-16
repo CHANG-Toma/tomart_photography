@@ -4,82 +4,91 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{{ asset('css/tailwind.css') }}">
     <link rel="stylesheet" href="{{ asset('css/font-awesome/css/font-awesome.min.css') }}">
-    <title>
-        {% block title %}Tom'Art Photographie{% endblock %}
-    </title>
+    <title>{% block title %}Tom'Art Photographie{% endblock %}</title>
 </head>
 <body>
 
 {% block body %}
 
-{% include 'header.html.twig' %}
+    {% include 'header.html.twig' %}
 
-<section class="mt-6 md:mt-0 relative">
-    <div class="absolute w-full h-full top-0 flex justify-center items-center">
-        <h1 class="text-center text-9xl font-thin sm:text-6xl md:text-9xl lg:text-9xl">Let me show you some</h1>
-    </div>
-    <img class="w-full" src="https://i.postimg.cc/fLN9Nwrd/DSC-8775.jpg" alt="banner">
-</section>
-
-<section class="text-center m-10">
-    <div>
-        <h1 class="mb-4">Some of my art creation</h1>
-    </div>
-
-    <div class="mb-4">
-        <button id="filter-all" class="bg-black text-white px-4 py-2 rounded">All</button>
-        <button id="filter-travel" class="bg-black text-white px-4 py-2 rounded">Travel</button>
-        <button id="filter-portrait" class="bg-black text-white px-4 py-2 rounded">Portrait</button>
-        <button id="filter-sport" class="bg-black text-white px-4 py-2 rounded">Sport</button>
-    </div>
-</section>
-
-<section class="flex flex-col items-center flex-wrap lg:flex-row lg:justify-center gap-10 m-10" id="photo-grid">
-    {% for image in allImages %}
-        <div class="relative flex justify-center group">
-            <img class="w-[450px] h-[450px] min-w-[330px] object-cover transition group-hover:bg-black" src="{{ image.url }}">
-            <div class="absolute z-30 flex w-full h-full justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <p class="text-white text-lg font-normal text-center">{{ image.texte }}</p>
-            </div>
-            <div class="absolute z-20 h-full w-full bg-black opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
+    <!-- Section Banner -->
+    <section class="mt-6 md:mt-0 relative">
+        <div class="absolute w-full h-full top-0 flex justify-center items-center">
+            <h1 class="text-center text-white text-9xl font-thin sm:text-6xl md:text-9xl lg:text-9xl">Let me show you some</h1>
         </div>
-    {% endfor %}
-</section>
+        <img class="w-full" src="https://i.postimg.cc/fLN9Nwrd/DSC-8775.jpg" alt="banner">
+    </section>
 
-<script>
-    const photoGrid = document.getElementById("photo-grid");
-    const filterAll = document.getElementById("filter-all");
-    const filterTravel = document.getElementById("filter-travel");
-    const filterPortrait = document.getElementById("filter-portrait");
-    const filterSport = document.getElementById("filter-sport");
+    <!-- Section des Boutons de Filtre -->
+    <section class="text-center m-10">
+        <div><h1 class="mb-4">Some of my art creation</h1></div>
+        <div class="mb-4">
+            <button id="filter-all" class="bg-black text-white px-4 py-2 rounded">All</button>
+            <button id="filter-travel" class="bg-black text-white px-4 py-2 rounded">Travel</button>
+            <button id="filter-portrait" class="bg-black text-white px-4 py-2 rounded">Portrait</button>
+            <button id="filter-sport" class="bg-black text-white px-4 py-2 rounded">Sport</button>
+        </div>
+    </section>
 
-    // Les données des images obtenues depuis le contrôleur
-    const imagesByType = JSON.parse('{{ imagesByType|json_encode()|raw }}');
-    const allImages = JSON.parse('{{ allImages|json_encode()|raw }}');
+    <!-- Section d'Affichage des Images -->
+    <section class="flex flex-col items-center flex-wrap lg:flex-row lg:justify-center gap-10 m-10" id="photo-grid">
+        {% for image in allImages %}
+            <div class="relative flex justify-center group">
+                <img class="w-[450px] h-[450px] min-w-[330px] object-cover transition group-hover:bg-black" src="{{ image.url }}" alt="{{ image.texte }}">
+                <div class="absolute z-30 flex w-full h-full justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <p class="text-white text-lg font-normal text-center">{{ image.texte }}</p>
+                </div>
+                <div class="absolute z-20 h-full w-full bg-black opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
+            </div>
+        {% endfor %}
+    </section>
 
-    console.log(imagesByType);
-    console.log(allImages);
 
-    // Fonction pour afficher les photos en fonction du type sélectionné
-    function displayPhotos(images) {
-        photoGrid.innerHTML = "";
-        images.forEach(image => {
-            const img = document.createElement("img");
-            img.src = image.url;
-            img.className = "w-full h-auto rounded";
-            photoGrid.appendChild(img);
+    <!-- Script JavaScript pour le Filtrage -->
+    <script>
+        const photoGrid = document.getElementById('photo-grid');
+        const filterButtons = {
+            'all': document.getElementById('filter-all'),
+            'Travel': document.getElementById('filter-travel'),
+            'Portrait': document.getElementById('filter-portrait'),
+            'Sport': document.getElementById('filter-sport')
+        };
+
+        const allImages = {{ allImages|json_encode()|raw }};
+        const imagesByType = {{ imagesByType|json_encode()|raw }};
+
+        function updatePhotoGrid(images) {
+            photoGrid.innerHTML = '';
+            images.forEach(image => {
+                const imgContainer = document.createElement('div');
+                imgContainer.className = 'relative flex justify-center group';
+                imgContainer.innerHTML = `
+                <img class="w-[450px] h-[450px] min-w-[330px] object-cover transition group-hover:bg-black" src="${image.url}" alt="${image.texte}">
+                <div class="absolute z-30 flex w-full h-full justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <p class="text-white text-lg font-normal text-center">${image.texte}</p>
+                </div>
+                <div class="absolute z-20 h-full w-full bg-black opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
+            `;
+                photoGrid.appendChild(imgContainer);
+            });
+        }
+
+        Object.entries(filterButtons).forEach(([type, button]) => {
+            button.addEventListener('click', () => {
+                const imagesToShow = type === 'all' ? allImages : imagesByType[type];
+                if (!imagesToShow) {
+                    console.error(`Aucune image trouvée pour le type : ${type}`);
+                    return;
+                }
+                console.log(`Filtre ${type} cliqué, données :`, imagesToShow);
+                updatePhotoGrid(imagesToShow);
+            });
         });
-    }
 
-    // Écouteurs d'événements pour les boutons de filtre
-    filterAll.addEventListener("click", () => displayPhotos(allImages));
-    filterTravel.addEventListener("click", () => displayPhotos(imagesByType.Travel));
-    filterPortrait.addEventListener("click", () => displayPhotos(imagesByType.Portrait));
-    filterSport.addEventListener("click", () => displayPhotos(imagesByType.Sport));
-
-    // Affichez toutes les photos par défaut
-    displayPhotos(allImages);
-</script>
+        // Affichage initial des images
+        updatePhotoGrid(allImages);
+    </script>
 
 {% endblock %}
 
